@@ -11,21 +11,16 @@
 |
 */
 
-Route::get('/', 'PagesController@getHome');
+Route::get('/', 'PagesController@getHome')->name('home');
 
-Route::get('/contact', 'PagesController@getContact');
+Route::get('/home', function(){
+    return redirect()->route('home');});
 
-Route::get('/about', 'PagesController@getAbout');
+Route::get('/contact', 'PagesController@getContact')->name('contact');
 
-Route::get('/post', 'PagesController@getPost');
+Route::get('/about', 'PagesController@getAbout')->name('about');
 
+Route::get('/post', 'PagesController@getPost')->name('post');
 
-
-
-
-
-
-
+Route::resource('/posts','PostController');
 ?>
-
-
