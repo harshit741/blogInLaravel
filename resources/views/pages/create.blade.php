@@ -4,7 +4,7 @@
 @section('content')
     <!-- Page Header -->
     <header class="container">
-        <h2 class="createPost">Create Post</h2>
+        <h1 class="createPost">Create Post</h1>
         <hr>
     </header>
     <div class="container">
@@ -34,12 +34,17 @@
                         <label class="custom-file-label" for="headerImage">Header Image</label>
                     </div>
                     <div class="">
-                        <select name="category" class="custom-select custom-select-lg mb-4 custom-control-inline" >
-                            <option selected>Select Category</option>
-                            <option value="volvo">Volvo</option>
-                            <option value="fiat">Fiat</option>
-                            <option value="audi">Audi</option>
-                        </select>
+                            <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <select name="category" class="custom-select custom-select-lg mb-4 " >
+                                            <option selected>Select Category</option>
+                                            <option value="volvo">Volvo</option>
+                                            <option value="fiat">Fiat</option>
+                                            <option value="audi">Audi</option>
+                                        </select>  
+                                    </div>
+                                    <input type="text" class="form-control form-control-lg" placeholder="Or Add Your Own">
+                            </div>
                         <div class="custom-control custom-switch mb-4 custom-control-inline">
                                 <input type="checkbox" class="custom-control-input " id="anonymous" name="anonymous">
                                 <label class="custom-control-label" for="anonymous">Post Anonymously</label>

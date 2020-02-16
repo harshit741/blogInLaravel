@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Posts;
 
 class PostController extends Controller
 {
@@ -12,8 +13,9 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return view('pages.create');
+    {   
+        $post = Post::all();
+        return redirect()->route('home')->with('post',$post);
     }
 
     /**
@@ -23,7 +25,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.create');
     }
 
     /**
