@@ -14,8 +14,8 @@ class PostController extends Controller
      */
     public function index()
     {   
-        $post = Post::all();
-        return redirect()->route('home')->with('post',$post);
+        $posts = Posts::all();
+        return view('pages.post')->with('posts',$posts);
     }
 
     /**
