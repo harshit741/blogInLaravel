@@ -1,7 +1,7 @@
 <?php
 
 /*
-|--------------------------------------------------------------------------
+|----------err----------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
 |
@@ -15,9 +15,12 @@ Route::get('/', 'PagesController@getHome')->name('home');
 
 Route::redirect('/home', '/');
 
-Route::view('/contact', 'PostController@contact')->name('contact');
+Route::get('/contact', 'PagesController@getContact')->name('contact');
 
 Route::view('/about', 'pages.about')->name('about');
 
 Route::resource('/posts','PostController');
+
+Route::post('/post/store','PostController@store')->name('store');
 ?>
+

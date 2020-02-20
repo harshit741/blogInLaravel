@@ -14,6 +14,8 @@
 <body>
 
   @include('layout.navbar')
+  
+  @include('layout.errmsg')
 
   @yield('content')
 

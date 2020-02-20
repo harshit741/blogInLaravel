@@ -10,48 +10,48 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 col-md-10 mx-auto">
-                <form action="{{route('posts.create')}}" method="GET">
+                <form action="{{route('store')}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="control-group">
                         <div class="form-group floating-label-form-group controls">
                             <label>Title</label>
-                            <input type="text" class="form-control" placeholder="Title" required data-validation-required-message="Title cannot be blank.">
+                            <input type="text" name="title" class="form-control" placeholder="Title">
                             <p class="help-block text-danger"></p>
                         </div>
                     </div>
             
-                
+            
                     <div class="control-group mb-3">
                         <div class="form-group floating-label-form-group controls">
                             <label>Post Body</label>
-                            <textarea rows="15" class="form-control" placeholder="Post Body" required data-validation-required-message="Post cannot be blank."></textarea>
+                            <textarea rows="15" class="form-control" name="body" placeholder="Post Body"></textarea>
                             <p class="help-block text-danger"></p>
                         </div>
                     </div>
                     <br>
                     <div class="custom-file mb-4">
-                        <input type="file" class="custom-file-input" id="headerImage" accept="image/*">
+                        <input type="file" class="custom-file-input" id="headerImage" name="header_image">
                         <label class="custom-file-label" for="headerImage">Header Image</label>
                     </div>
                     <div class="">
                             <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <select name="category" class="custom-select custom-select-lg mb-4 " >
-                                            <option selected>Select Category</option>
-                                            <option value="volvo">Volvo</option>
-                                            <option value="fiat">Fiat</option>
-                                            <option value="audi">Audi</option>
-                                        </select>  
-                                    </div>
-                                    <input type="text" class="form-control form-control-lg" placeholder="Or Add Your Own">
+                                <div class="input-group-prepend">
+                                    <select name="category" class="custom-select custom-select-lg mb-4 " >
+                                        <option selected>Select Category</option>
+                                        <option value="volvo">Volvo</option>
+                                        <option value="fiat">Fiat</option>
+                                        <option value="audi">Audi</option>
+                                    </select>  
+                                </div>
+                                <input type="text" class="form-control form-control-lg" name="category" placeholder="Or Add Your Own">
                             </div>
                         <div class="custom-control custom-switch mb-4 custom-control-inline">
-                                <input type="checkbox" class="custom-control-input " id="anonymous" name="anonymous">
-                                <label class="custom-control-label" for="anonymous">Post Anonymously</label>
+                            <input type="checkbox" class="custom-control-input " id="anonymous" value="anonymous" name="anonymous">
+                            <label class="custom-control-label" for="anonymous">Post Anonymously</label>
                         </div>
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary">Create Post</button>
+                        <input type="submit" value="Create Post" class="btn btn-primary">
                     </div>
                 </form>
             </div>

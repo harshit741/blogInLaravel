@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">
             <div class="site-heading">
-                <h1>Clean Blog</h1>
+                <h2>Blog In Laravel | A PHP Framework</h2>
                 <span class="subheading">A Blog Theme by Start Bootstrap</span>
             </div>
             </div>
@@ -24,7 +24,7 @@
             @if(count($posts) > 0)
                 @foreach($posts as $post)
                 <div class="post-preview">
-                <a href="/post">
+                <a href="/posts/{{$post->id}}">
                     <h2 class="post-title">
                         {{$post->title}}
                     </h2>
@@ -33,7 +33,7 @@
                     </h3>
                 </a>
                 <p class="post-meta">Posted by
-                    <a href="#">Start Bootstrap</a>
+                    <a href="/pages/post">Start Bootstrap</a>
                     {{$post->created_at}}</p>
                 </div>
                 <hr>
@@ -43,7 +43,7 @@
             @endif
             <!-- Pager -->
             <div class="clearfix">
-            <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+            <a class="btn btn-primary float-right" href="/posts">Older Posts &rarr;</a>
             </div>
         </div>
         </div>

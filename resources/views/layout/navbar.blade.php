@@ -18,6 +18,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="/contact">Contact</a>
             </li>
+            <li class="nav-item">
+                    <a class="nav-link" href="/posts/create"><i class="fas fa-plus"></i> Create Post</a>
+                </li>
             </ul>
         </div>
         </div>

@@ -9,7 +9,7 @@ class PagesController extends Controller
 {
     public function getHome() {
 
-        $posts = Posts::all();
+        $posts = Posts::orderBy('created_at','desc')->paginate(5);
         return view('pages.home')->with('posts',$posts);
     }
 
@@ -23,14 +23,7 @@ class PagesController extends Controller
         return view('pages.contact');
     }
 
-    public function getPost(){
-
-        return view('pages.post');
-    }
 }
-
-
-
 
 
 ?>

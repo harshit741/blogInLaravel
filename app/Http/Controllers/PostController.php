@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Posts;
+use DB;
 
 class PostController extends Controller
 {
@@ -14,8 +15,8 @@ class PostController extends Controller
      */
     public function index()
     {   
-        $posts = Posts::all();
-        return view('pages.post')->with('posts',$posts);
+        $posts = Posts::orderBy('created_at','desc')->paginate(10);
+        return view('pages.posts')->with('posts',$posts);
     }
 
     /**
@@ -25,7 +26,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('pages.create');
+        return view('pages/create');
     }
 
     /**
@@ -36,7 +37,37 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'title'      => 'required|unique:posts,title|max:255',
+            'body'       => 'required',
+            'category'   => 'required',
+            'header_image' => 'image|nullable|max:20480'
+        ]);
+        
+        if($request->hasFile('header_image')){
+            // Get filename with the extension
+            $filenameWithExt = $request->file('header_image')->getClientOriginalName();
+            // Get just filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            // Get just ext
+            $extension = $request->file('header_image')->getClientOriginalExtension();
+            // Filename to store
+            $storeImage = $filename.'_'.time().'.'.$extension;
+            // Upload Image
+            $path = $request->file('header_image')->storeAs('/post_header_images', $storeImage);
+        } else {
+            $storeImage = 'noimage.jpg';
+        }
+        $post = new Posts;
+        $post->title = $request->input('title');
+        $post->body = $request->input('body');
+        $post->category = $request->input('category');
+        $post->anonymous = $request->input('anonymous');
+        $post->header_image = $storeImage;
+        
+        $post->save();
+
+        return redirect('/posts')->with('success', 'Post Created');
     }
 
     /**
@@ -47,7 +78,8 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+        $posts = Posts::find($id);
+        return view('pages.post')->with('posts',$posts);
     }
 
     /**

@@ -18,8 +18,9 @@ class CreatePostsTable extends Migration
             $table->string('title');
             $table->mediumText('body');
             $table->string('category');
-            $table->boolean('anonymous');
+            $table->string('anonymous')->nullable();
             $table->timestamps();
+            $table->string('header_image');
         });
     }
 
