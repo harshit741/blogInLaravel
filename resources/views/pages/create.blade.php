@@ -30,8 +30,8 @@
                     </div>
                     <br>
                     <div class="custom-file mb-4">
-                        <input type="file" class="custom-file-input" id="headerImage" name="header_image">
-                        <label class="custom-file-label" for="headerImage">Header Image</label>
+                        <input type="file" class="custom-file-input" id="header_image" name="header_image">
+                        <label class="custom-file-label" for="header_image">Header Image</label>
                     </div>
                     <div class="">
                             <div class="input-group mb-3">

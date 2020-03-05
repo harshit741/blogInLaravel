@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Posts;
 use DB;
+use Illuminate\Support\Facades\Storage;
+
 
 class PostController extends Controller
 {
@@ -47,8 +49,9 @@ class PostController extends Controller
         if($request->hasFile('header_image')){
             // Get filename with the extension
             $filenameWithExt = $request->file('header_image')->getClientOriginalName();
+            $fileName = str_replace(' ', '_', $filenameWithExt);
             // Get just filename
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $filename = pathinfo($fileName, PATHINFO_FILENAME);
             // Get just ext
             $extension = $request->file('header_image')->getClientOriginalExtension();
             // Filename to store

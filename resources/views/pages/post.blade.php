@@ -4,7 +4,7 @@
 
     <!--  Header Image-->
 
-        <header class="masthead" style="background-image:url({{asset('post_header_image/'.$posts->filename)}})">
+        <header class="masthead" style="background-image:url({{asset('post_header_images/'.$posts->header_image)}})">
             <div class="overlay"></div>
                 <div class="container">
                     <div class="row">

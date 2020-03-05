@@ -23,4 +23,3 @@ Route::resource('/posts','PostController');
 
 Route::post('/post/store','PostController@store')->name('store');
 ?>
-
