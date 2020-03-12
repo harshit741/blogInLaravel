@@ -22,4 +22,11 @@ Route::view('/about', 'pages.about')->name('about');
 Route::resource('/posts','PostController');
 
 Route::post('/post/store','PostController@store')->name('store');
+
+Auth::routes();
+// Route::post('login','Auth\LoginController@login');
+
+Route::get('/home', 'HomeController@index');
+
 ?>
+

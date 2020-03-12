@@ -21,6 +21,7 @@ class CreatePostsTable extends Migration
             $table->string('anonymous')->nullable();
             $table->timestamps();
             $table->string('header_image');
+            $table->integer('user_id');
         });
     }
 

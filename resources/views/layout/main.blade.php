@@ -14,14 +14,11 @@
 <body>
 
   @include('layout.navbar')
-  
   @include('layout.errmsg')
-
+  
   @yield('content')
 
   @include('layout.footer')
-
-  @include('layout.postJsScript')
 
 </body>
 

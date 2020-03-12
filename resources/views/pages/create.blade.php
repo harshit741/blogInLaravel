@@ -36,7 +36,7 @@
                     <div class="">
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <select name="category" class="custom-select custom-select-lg mb-4 " >
+                                    <select id="category" class="custom-select custom-select-lg mb-4 " >
                                         <option selected>Select Category</option>
                                         <option value="volvo">Volvo</option>
                                         <option value="fiat">Fiat</option>
@@ -57,14 +57,31 @@
             </div>
         </div>
     </div>
+    <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js" ></script>
     <script>
-            // To make name of file appear on selection
+        CKEDITOR.replace( 'body' );
+        window.addEventListener('DOMContentLoaded', function() {
+        (function($) {
+            //CK Editor
             $(document).ready(function(){
-                    $(".custom-file-input").on("change", function() {
+                $(".custom-file-input").on("change", function() {
                     var fileName = $(this).val().split("\\").pop();
                     $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-                    });
-              });
+                });
+                //Adding category via text or dropdown
+                $("#category").on('change', function(){
+                    if(this.value == "Select Category"){
+                        $('[name="category"]').val("");
+                        $('[name="category"]').attr('readonly', false);
+                    }else{
+
+                        $('[name="category"]').val(this.value);
+                        $('[name="category"]').attr('readonly', true);
+                    }
+                });
+            });
+        })(jQuery);
+    });
     </script>
 
 @endsection

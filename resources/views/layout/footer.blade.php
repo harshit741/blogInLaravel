@@ -21,7 +21,7 @@
                 </a>
                 </li>
                 <li class="list-inline-item">
-                <a href="#">
+                <a href="https://www.github.com/harshit741/blogInLaravel">
                     <span class="fa-stack fa-lg">
                     <i class="fas fa-circle fa-stack-2x"></i>
                     <i class="fab fa-github fa-stack-1x fa-inverse"></i>
@@ -29,8 +29,18 @@
                 </a>
                 </li>
             </ul>
-            <p class="copyright text-muted">Copyright &copy; Your Website 2019</p>
+            <p class="copyright text-muted">Copyright &copy; Blog In Laravel 2020</p>
             </div>
         </div>
         </div>
     </footer>
+
+
+
+    <!-- Custom fonts for this template -->
+    <link href="{{URL::asset('fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="{{URL::asset('css/clean-blog.min.css')}}" rel="stylesheet">

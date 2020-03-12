@@ -17,7 +17,7 @@ class PostController extends Controller
      */
     public function index()
     {   
-        $posts = Posts::orderBy('created_at','desc')->paginate(10);
+        $posts = Posts::orderBy('created_at','desc')->paginate(5);
         return view('pages.posts')->with('posts',$posts);
     }
 
@@ -44,6 +44,7 @@ class PostController extends Controller
             'body'       => 'required',
             'category'   => 'required',
             'header_image' => 'image|nullable|max:20480'
+            
         ]);
         
         if($request->hasFile('header_image')){
@@ -67,6 +68,8 @@ class PostController extends Controller
         $post->category = $request->input('category');
         $post->anonymous = $request->input('anonymous');
         $post->header_image = $storeImage;
+        $post->user_id = auth()->id();
+        
         
         $post->save();
 

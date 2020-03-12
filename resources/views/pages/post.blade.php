@@ -31,7 +31,7 @@
                                             {{$posts->title}}
                                         </h2>
                                         <p class="post-subtitle">
-                                        {{$posts->body}}
+                                        {!! $posts->body !!}
                                         </p>
                                     </a>
                                     <p class="post-meta">Posted by
