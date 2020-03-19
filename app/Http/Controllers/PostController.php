@@ -18,26 +18,9 @@ class PostController extends Controller
     public function index()
     {   
         $posts = Posts::orderBy('created_at','desc')->paginate(5);
-
-        // $posts = Posts::all();
-        // $posts->author = User::find($posts->user_id)->name;
-        // $s = '';
-        // foreach($posts as $key => $val) {
-        //     $s = $val->user_id;
-        //     echo $posts->author = User::find($s)->name;
-        //     }
         for ($i=0; $i < count($posts); $i++) { 
             $posts[$i]->author = User::find($posts[$i]->user_id)->name;
         }
-        // $posy = $posts->pluck('user_id');
-        // foreach ($posy as $a) {
-        //     $posts = Posts::find($a);
-        //     $posts->author = array((User::find($a)->name);
-        //     continue;
-            
-        // }
-        // return $posts->author;
-
         return view('pages.posts')->with('posts',$posts);
     }
 
@@ -90,7 +73,6 @@ class PostController extends Controller
         $post->header_image = $storeImage;
         $post->user_id = auth()->id();
         $user_id = auth()->id();
-        // $post->author = User::find($user_id)->name;
         $post->save();
 
         return redirect('/posts')->with('success', 'Post Created');
@@ -117,7 +99,15 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = Posts::find($id);
+        if (!isset($post)){
+            return redirect('/posts')->with('error', 'No Post Found');
+        }
+        if(auth()->id() !==$post->user_id){
+            return redirect('/posts')->with('error', 'Unauthorized Page');
+        }
+
+        return view('pages.edit')->with('post', $post);
     }
 
     /**
@@ -129,7 +119,43 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'title'      => 'required|max:255',
+            'body'       => 'required',
+            'category'   => 'required',
+            'header_image' => 'image|nullable|max:20480'
+            
+        ]);
+        
+        if($request->hasFile('header_image')){
+            // Get filename with the extension
+            $filenameWithExt = $request->file('header_image')->getClientOriginalName();
+            $fileName = str_replace(' ', '_', $filenameWithExt);
+            // Get just filename
+            $filename = pathinfo($fileName, PATHINFO_FILENAME);
+            // Get just ext
+            $extension = $request->file('header_image')->getClientOriginalExtension();
+            // Filename to store
+            $storeImage = $filename.'_'.time().'.'.$extension;
+            // Upload Image
+            $path = $request->file('header_image')->storeAs('/public/post/header', $storeImage);
+            Storage::delete('public/post/header'.$post->header_image);
+        } else {
+            $post = Posts::find($id);
+            $storeImage = $post->header_image;
+        }
+            Storage::delete('public/post/header'.$post->header_image);
+            $post = Posts::find($id);
+            $post->title = $request->input('title');
+            $post->body = $request->input('body');
+            $post->category = $request->input('category');
+            $post->anonymous = $request->input('anonymous');
+            $post->header_image = $storeImage;
+            $post->save();
+
+            // return $post;
+            return redirect('/posts')->with('success', 'Post Updated');
+
     }
 
     /**
@@ -140,6 +166,17 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
+        $post = Posts::find($id);
+        if (!isset($post)){
+            return redirect('/posts')->with('error', 'No Post Found');
+        }
+        if(auth()->user()->id !==$post->user_id){
+            return redirect('/posts')->with('error', 'Unauthorized Page');
+        }
+        $post->delete();
+        $name = auth()->user()->name;
+        return redirect()->route('dashboard',$name)->with('success', 'Post Removed');
+
     }
 }

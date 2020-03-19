@@ -30,8 +30,24 @@ class PagesController extends Controller
     public function category($category) {
 
         $posts = Posts::orderBy('created_at','desc')->where('category',$category)->paginate(5);
-
+        for ($i=0; $i < count($posts); $i++) { 
+            $posts[$i]->author = User::find($posts[$i]->user_id)->name;
+        }
         return view('pages.category')->with('posts',$posts)->with('category',$category);
+    }
+
+    public function dashboard($name){
+        $profile = User::where('name', $name)->get();
+        // for ($i=0; $i < count($name); $i++) { 
+        //     $name[$i]->author = User::find($name[$i]->id)->name;
+        // }
+        $uid =  $profile[0]->id;
+        $posts = Posts::orderBy('created_at','desc')->where('user_id',$uid)->paginate(5);
+        // for ($i=0; $i < count($posts); $i++) { 
+        //     $posts[$i]->author = User::find($posts[$i]->user_id)->name;
+        // }
+        return view('pages.dashboard')->with('posts', $posts);
+        // return $posts;
     }
 }
 

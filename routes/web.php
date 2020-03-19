@@ -19,17 +19,15 @@ Route::get('/contact', 'PagesController@getContact')->name('contact');
 
 Route::view('/about', 'pages.about')->name('about');
 
-Route::resource('/posts','PostController');
-
-Route::post('/post/store','PostController@store')->name('store');
-
-Route::get('navbar','PagesController@nav');
+Route::resource('posts','PostController');
 
 Route::get('/category/{category}','PagesController@category');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
+Route::get('/dashboard/{name}','PagesController@dashboard')->name('dashboard');
 
 ?>
 

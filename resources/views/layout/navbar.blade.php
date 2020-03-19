@@ -1,5 +1,4 @@
     
-    
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
         <div class="container">
         <a class="navbar-brand" href="/">Blog In Laravel</a>
@@ -11,17 +10,18 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/">Home</a>
                 </li>
-                <li class="dropdown nav-item"><a class="dropdown-toggle" data-toggle="dropdown">Categories <span class="caret"></span></a>
-                    <ul class="dropdown-menu bg-dark">
-                        @php($cats = App\Posts::pluck('category'))
+                @php($cats = App\Posts::pluck('category'))
                        @php($cats = $cats->unique())
                             @if(count($cats)> 0)
+                <li class="dropdown nav-item"><a class="dropdown-toggle" data-toggle="dropdown">Categories <span class="caret"></span></a>
+                    <ul class="dropdown-menu bg-dark">
+                        
                                 @foreach($cats as $cat)
                                 <li class="nav-link bg-dark"><a href="/category/{{$cat}}">{{$cat}}</a></li>
                                 @endforeach
-                            @endif
                     </ul>
                   </li>
+                  @endif
                 <li class="nav-item">
                     <a class="nav-link" href="/about">About</a>
                 </li>
@@ -46,7 +46,7 @@
                 @endif
                 @else
                 <li class="nav-item dropdown">
-                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="/dashboard/{{Auth::user()->name}}" role="button" aria-haspopup="true" aria-expanded="false" v-pre>
                         {{ Auth::user()->name }} <span class="caret"></span>
                     </a>
 
