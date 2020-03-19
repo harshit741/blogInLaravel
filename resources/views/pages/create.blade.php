@@ -38,9 +38,13 @@
                                 <div class="input-group-prepend">
                                     <select id="category" class="custom-select custom-select-lg mb-4 " >
                                         <option selected>Select Category</option>
-                                        <option value="volvo">Volvo</option>
-                                        <option value="fiat">Fiat</option>
-                                        <option value="audi">Audi</option>
+                                        @php($cats = App\Posts::pluck('category'))
+                                        @php($cats = $cats->unique())
+                                            @if(count($cats)> 0)
+                                                @foreach($cats as $cat)
+                                                    <option value="{{$cat}}">{{$cat}}</option>
+                                                 @endforeach
+                                            @endif
                                     </select>  
                                 </div>
                                 <input type="text" class="form-control form-control-lg" name="category" placeholder="Or Add Your Own">

@@ -4,7 +4,7 @@
 
     <!--  Header Image-->
 
-        <header class="masthead" style="background-image:url({{asset('post_header_images/'.$posts->header_image)}})">
+        <header class="masthead" style="background-image:url({{asset('storage/post/header/'.$posts->header_image)}})">
             <div class="overlay"></div>
                 <div class="container">
                     <div class="row">
@@ -35,7 +35,7 @@
                                         </p>
                                     </a>
                                     <p class="post-meta">Posted by
-                                        <a href="/pages/post">Start Bootstrap</a>
+                                        <a href="/pages/post">{{$posts->author}}</a>
                                         {{$posts->created_at}}</p>
                                 </div>
                             </div>

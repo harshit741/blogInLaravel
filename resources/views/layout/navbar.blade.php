@@ -11,6 +11,17 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/">Home</a>
                 </li>
+                <li class="dropdown nav-item"><a class="dropdown-toggle" data-toggle="dropdown">Categories <span class="caret"></span></a>
+                    <ul class="dropdown-menu bg-dark">
+                        @php($cats = App\Posts::pluck('category'))
+                       @php($cats = $cats->unique())
+                            @if(count($cats)> 0)
+                                @foreach($cats as $cat)
+                                <li class="nav-link bg-dark"><a href="/category/{{$cat}}">{{$cat}}</a></li>
+                                @endforeach
+                            @endif
+                    </ul>
+                  </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/about">About</a>
                 </li>

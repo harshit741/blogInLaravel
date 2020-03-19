@@ -1,14 +1,11 @@
 @extends('layout.main')
-@section('title','Posts - BlogInLaravel')
+@section('title', $category)
 @section('content')
-    
-<!-- Main Content -->
-
 <div class="container">
     <div class="row">
     <div class="col-lg-8 col-md-10 mx-auto">
         <header class="container">
-            <h1 class="allPost">All Posts</h1>
+            <h1 class="allPost">Posts in {{$category}}</h1>
             <hr>
         </header>
         @if(count($posts) > 0)

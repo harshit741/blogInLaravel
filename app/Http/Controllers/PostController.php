@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Posts;
-use DB;
+use App\User;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -18,6 +18,26 @@ class PostController extends Controller
     public function index()
     {   
         $posts = Posts::orderBy('created_at','desc')->paginate(5);
+
+        // $posts = Posts::all();
+        // $posts->author = User::find($posts->user_id)->name;
+        // $s = '';
+        // foreach($posts as $key => $val) {
+        //     $s = $val->user_id;
+        //     echo $posts->author = User::find($s)->name;
+        //     }
+        for ($i=0; $i < count($posts); $i++) { 
+            $posts[$i]->author = User::find($posts[$i]->user_id)->name;
+        }
+        // $posy = $posts->pluck('user_id');
+        // foreach ($posy as $a) {
+        //     $posts = Posts::find($a);
+        //     $posts->author = array((User::find($a)->name);
+        //     continue;
+            
+        // }
+        // return $posts->author;
+
         return view('pages.posts')->with('posts',$posts);
     }
 
@@ -58,7 +78,7 @@ class PostController extends Controller
             // Filename to store
             $storeImage = $filename.'_'.time().'.'.$extension;
             // Upload Image
-            $path = $request->file('header_image')->storeAs('/post_header_images', $storeImage);
+            $path = $request->file('header_image')->storeAs('/public/post/header', $storeImage);
         } else {
             $storeImage = 'noimage.jpg';
         }
@@ -69,8 +89,8 @@ class PostController extends Controller
         $post->anonymous = $request->input('anonymous');
         $post->header_image = $storeImage;
         $post->user_id = auth()->id();
-        
-        
+        $user_id = auth()->id();
+        // $post->author = User::find($user_id)->name;
         $post->save();
 
         return redirect('/posts')->with('success', 'Post Created');
@@ -85,6 +105,7 @@ class PostController extends Controller
     public function show($id)
     {
         $posts = Posts::find($id);
+        $posts->author = User::find($posts->user_id)->name;
         return view('pages.post')->with('posts',$posts);
     }
 

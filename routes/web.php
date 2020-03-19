@@ -23,8 +23,11 @@ Route::resource('/posts','PostController');
 
 Route::post('/post/store','PostController@store')->name('store');
 
+Route::get('navbar','PagesController@nav');
+
+Route::get('/category/{category}','PagesController@category');
+
 Auth::routes();
-// Route::post('login','Auth\LoginController@login');
 
 Route::get('/home', 'HomeController@index');
 
