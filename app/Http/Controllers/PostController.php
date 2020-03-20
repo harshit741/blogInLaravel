@@ -138,6 +138,7 @@ class PostController extends Controller
             $storeImage = $filename.'_'.time().'.'.$extension;
             // Upload Image
             $path = $request->file('header_image')->storeAs('/public/post_header', $storeImage);
+            $post = Posts::find($id);
             Storage::delete('public/post_header'.$post->header_image);
         } else {
             $post = Posts::find($id);
