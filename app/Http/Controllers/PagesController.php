@@ -49,6 +49,13 @@ class PagesController extends Controller
         return view('pages.dashboard')->with('posts', $posts);
         // return $posts;
     }
+    public function author($author){
+        $profile = User::where('name', $author)->get();
+        $uid =  $profile[0]->id;
+        $posts = Posts::orderBy('created_at','desc')->where('user_id',$uid)->paginate(5);
+        return view('pages.author')->with('posts', $posts)->with('name',$author);
+
+    }
 }
 
 

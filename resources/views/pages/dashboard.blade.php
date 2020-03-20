@@ -11,7 +11,7 @@
                 @foreach($posts as $post)
                 <div class="card">
                     <div class="card-header">
-                      {{$post->title}}
+                      <a class="post-a" href="/posts/{{$post->id}}">{{$post->title}}</a>
                     <button data-toggle="modal" data-target="#delPost{{$post->id}}" data-targetid="{{$post->id}}" data-targetName="{{$post->title}}" class="btn btn-danger btn-sm float-right">Delete</button>
                         <a href="{{route('posts.edit',$post->id)}}" class="btn btn-primary btn-sm float-right ">Edit</a>
                     </div>
@@ -44,4 +44,4 @@
         </div>
     </div>
 </div>
-  @endsection
+@endsection

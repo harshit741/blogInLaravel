@@ -47,7 +47,6 @@ class PostController extends Controller
             'body'       => 'required',
             'category'   => 'required',
             'header_image' => 'image|nullable|max:20480'
-            
         ]);
         
         if($request->hasFile('header_image')){
@@ -61,9 +60,9 @@ class PostController extends Controller
             // Filename to store
             $storeImage = $filename.'_'.time().'.'.$extension;
             // Upload Image
-            $path = $request->file('header_image')->storeAs('/public/post/header', $storeImage);
+            $path = $request->file('header_image')->storeAs('/public/post_header', $storeImage);
         } else {
-            $storeImage = 'noimage.jpg';
+            $storeImage = 'noimage.png';
         }
         $post = new Posts;
         $post->title = $request->input('title');
@@ -124,7 +123,6 @@ class PostController extends Controller
             'body'       => 'required',
             'category'   => 'required',
             'header_image' => 'image|nullable|max:20480'
-            
         ]);
         
         if($request->hasFile('header_image')){
@@ -138,13 +136,13 @@ class PostController extends Controller
             // Filename to store
             $storeImage = $filename.'_'.time().'.'.$extension;
             // Upload Image
-            $path = $request->file('header_image')->storeAs('/public/post/header', $storeImage);
-            Storage::delete('public/post/header'.$post->header_image);
+            $path = $request->file('header_image')->storeAs('/public/post_header', $storeImage);
+            Storage::delete('public/post_header'.$post->header_image);
         } else {
             $post = Posts::find($id);
             $storeImage = $post->header_image;
         }
-            Storage::delete('public/post/header'.$post->header_image);
+            Storage::delete('public/post_header'.$post->header_image);
             $post = Posts::find($id);
             $post->title = $request->input('title');
             $post->body = $request->input('body');
@@ -175,6 +173,7 @@ class PostController extends Controller
             return redirect('/posts')->with('error', 'Unauthorized Page');
         }
         $post->delete();
+        Storage::delete('public/post/header'.$post->header_image);
         $name = auth()->user()->name;
         return redirect()->route('dashboard',$name)->with('success', 'Post Removed');
 

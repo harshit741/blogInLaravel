@@ -29,5 +29,8 @@ Route::get('/home', 'HomeController@index');
 
 Route::get('/dashboard/{name}','PagesController@dashboard')->name('dashboard');
 
+Route::get('/author/{author}','PagesController@author')->name('author');
+
+
 ?>
 

@@ -49,3 +49,12 @@
     border-radius:.2rem;
     margin: .5rem;
  }
+ .post-a{
+    font-size:1.8rem;
+    color: #212529;
+    font-weight:500;
+    font-family:'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif
+ }
+ .post-a:hover{
+     text-decoration: none;
+ }

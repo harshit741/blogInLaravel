@@ -51,7 +51,12 @@
                                 <input type="text" class="form-control form-control-lg" name="category" value="{{$post->category}}" placeholder="Or Add Your Own">
                             </div>
                         <div class="custom-control custom-switch mb-4 custom-control-inline">
-                        <input type="checkbox" class="custom-control-input " id="anonymous" value="{{$post->anonymous}}" name="anonymous">
+                            @if ($post->anonymous != 'anonymous')
+                            <input type="checkbox" class="custom-control-input " id="anonymous" value="anonymous" name="anonymous">
+                            @else
+                            <input type="checkbox" class="custom-control-input " id="anonymous" value="anonymous" name="anonymous" checked>
+
+                            @endif
                             <label class="custom-control-label" for="anonymous">Post Anonymously</label>
                         </div>
                     </div>
