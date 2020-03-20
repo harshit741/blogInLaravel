@@ -139,12 +139,18 @@ class PostController extends Controller
             // Upload Image
             $path = $request->file('header_image')->storeAs('/public/post_header', $storeImage);
             $post = Posts::find($id);
-            unlink(storage_path('app/public/post_header/'.$post->header_image));        
-        } else {
+            if(is_file($post->header_image)){
+                unlink(storage_path('app/public/post_header/'.$post->header_image));
+            }
+            else{
+                Storage::delete('public/post_header'.$post->header_image);
+    
+            }        
+        } 
+        else {
             $post = Posts::find($id);
             $storeImage = $post->header_image;
         }
-            Storage::delete('public/post_header'.$post->header_image);
             $post = Posts::find($id);
             $post->title = $request->input('title');
             $post->body = $request->input('body');
@@ -174,7 +180,13 @@ class PostController extends Controller
         if(auth()->user()->id !==$post->user_id){
             return redirect('/posts')->with('error', 'Unauthorized Page');
         }
-        unlink(storage_path('app/public/post_header/'.$post->header_image));        
+        if(is_file($post->header_image)){
+            unlink(storage_path('app/public/post_header/'.$post->header_image));
+        }
+        else{
+            Storage::delete('public/post_header'.$post->header_image);
+
+        }
         $post->delete();
         $name = auth()->user()->name;
         return redirect()->route('dashboard',$name)->with('success', 'Post Removed');
