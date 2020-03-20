@@ -58,3 +58,8 @@
  .post-a:hover{
      text-decoration: none;
  }
+ .post-preview{
+     color:#212529;
+     font-size: large;
+     font-weight: 500;
+    }

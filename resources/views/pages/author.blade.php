@@ -16,8 +16,8 @@
                             <h2 class="post-title">
                                 {{$post->title}}
                             </h2>
-                            <h3 class="post-subtitle">
-                                {!! $post->body !!}
+                            <h3 class="post-preview">
+                                {!! Str::words($post->body, 15, ' ....') !!}
                             </h3>
                         </a>
                         <p class="post-meta">

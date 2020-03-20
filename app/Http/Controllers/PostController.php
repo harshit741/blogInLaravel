@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Posts;
 use App\User;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 
 class PostController extends Controller
@@ -43,7 +44,7 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'title'      => 'required|unique:posts,title|max:255',
+            'title'      => 'required|unique:posts|max:255',
             'body'       => 'required',
             'category'   => 'required',
             'header_image' => 'image|nullable|max:20480'
@@ -151,8 +152,8 @@ class PostController extends Controller
             $post->header_image = $storeImage;
             $post->save();
 
-            // return $post;
-            return redirect('/posts')->with('success', 'Post Updated');
+            $name = auth()->user()->name;
+            return redirect()->route('dashboard',$name)->with('success', 'Post Upadted');
 
     }
 
