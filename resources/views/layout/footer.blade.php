@@ -29,7 +29,7 @@
                 </a>
                 </li>
             </ul>
-            <p class="copyright text-muted">Copyright &copy; Blog In Laravel 2020</p>
+            <p class="copyright text-muted">Copyright &copy; Made By Harshit Singh</p>
             </div>
         </div>
         </div>
