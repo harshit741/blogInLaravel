@@ -30,7 +30,7 @@
                             <div class="col-lg-8 col-md-10 mx-auto">
                                 <div class="post-preview">
                                         <h2 class="post-title">
-                                            {{$posts->title}}
+                                            {{ucwords($posts->title)}}
                                         </h2>
                                         <p class="post-subtitle">
                                         {!! $posts->body !!}
